@@ -79,33 +79,33 @@ With `valuePrefix = "test"` and `eventName` left default:
 
 ## 📥 Using the dataLayer Variables
 
-このテンプレートは、GA4のクライアント・セッション情報をdataLayerに追加しますが、**利用にあたってはGTMでの対応するdataLayer変数の作成が必要**です。
+This template pushes GA4 client and session information to the dataLayer, but **you must create corresponding dataLayer variables in GTM to use these values**.
 
-### 📋 作成される dataLayer キー
+### 📋 Created dataLayer Keys
 
-テンプレートが出力する各キーに対して、GTMで対応するdataLayer変数を作成してください：
+Create the following dataLayer variables in GTM for each key output by this template:
 
-| dataLayer キー           | 説明                                    | 変数名の例             |
+| dataLayer Key           | Description                             | Example Variable Name  |
 | ----------------------- | -------------------------------------- | -------------------- |
-| `client_id`             | GA4クライアントID                        | `DLV - Client ID`    |
-| `ga_session_id`         | GA4セッションID                         | `DLV - Session ID`   |
-| `session_number`        | セッション番号                           | `DLV - Session Number` |
-| `measurement_id`        | 測定ID（G-XXXXXXX）                     | `DLV - Measurement ID` |
+| `client_id`             | GA4 Client ID                          | `DLV - Client ID`    |
+| `ga_session_id`         | GA4 Session ID                         | `DLV - Session ID`   |
+| `session_number`        | Session Number                         | `DLV - Session Number` |
+| `measurement_id`        | Measurement ID (G-XXXXXXX)             | `DLV - Measurement ID` |
 
-> 💡 **プレフィックス使用時**: `valuePrefix = "analytics"` の場合、キーは `analytics_client_id` などになります。
+> 💡 **With Prefix**: When `valuePrefix = "analytics"`, keys become `analytics_client_id`, etc.
 
-### 🔧 GTMでの変数作成手順
+### 🔧 GTM Variable Creation Steps
 
-1. **GTM管理画面** → **変数** → **新規**
-2. **変数の種類**: **データレイヤーの変数**
-3. **データレイヤーの変数名**: 上記キー名を入力（例: `client_id`）
-4. **変数名**: 分かりやすい名前を設定（例: `DLV - Client ID`）
+1. **GTM Dashboard** → **Variables** → **New**
+2. **Variable Type**: **Data Layer Variable**
+3. **Data Layer Variable Name**: Enter key name from above (e.g., `client_id`)
+4. **Variable Name**: Set a clear name (e.g., `DLV - Client ID`)
 
-### 🎯 活用方法の例
+### 🎯 Usage Examples
 
-#### **1. Server-side GTMへの送信**
+#### **1. Send to Server-side GTM**
 ```javascript
-// GA4イベントタグで追加パラメータとして送信
+// Send as additional parameters in GA4 Event tags
 {
   "client_id": "{{DLV - Client ID}}",
   "session_id": "{{DLV - Session ID}}",
@@ -113,25 +113,25 @@ With `valuePrefix = "test"` and `eventName` left default:
 }
 ```
 
-#### **2. カスタムディメンションとして設定**
-GA4設定タグのカスタムディメンションで：
+#### **2. Set as Custom Dimensions**
+In GA4 Configuration tag custom dimensions:
 - `custom_client_id`: `{{DLV - Client ID}}`
 - `session_number`: `{{DLV - Session Number}}`
 
-#### **3. 条件付きトリガーでの利用**
-トリガーの条件で `{{DLV - Client ID}}` が存在する場合のみ発火するよう設定
+#### **3. Use in Conditional Triggers**
+Set trigger conditions to fire only when `{{DLV - Client ID}}` exists
 
-#### **4. Measurement Protocol API での利用**
-外部システムからGA4にデータ送信する際のclient_idとして活用
+#### **4. Use with Measurement Protocol API**
+Utilize as client_id when sending data to GA4 from external systems
 
-### ⚡ 推奨セットアップ
+### ⚡ Recommended Setup
 
-効率的な利用のため、以下の手順をお勧めします：
+For efficient usage, we recommend the following workflow:
 
-1. **変数作成**: 上記4つのdataLayer変数をすべて作成
-2. **トリガー設定**: `analytics_storage_read` イベントをトリガーとして使用
-3. **依存関係**: このテンプレートタグを他のタグより先に実行
-4. **デバッグ**: GTMプレビューモードでdataLayer値を確認
+1. **Create Variables**: Create all 4 dataLayer variables listed above
+2. **Configure Trigger**: Use the `analytics_storage_read` event as trigger
+3. **Tag Sequencing**: Execute this template tag before other dependent tags
+4. **Debug**: Verify dataLayer values in GTM Preview mode
 
 ---
 
