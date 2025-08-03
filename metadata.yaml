@@ -1,0 +1,5 @@
+homepage: "https://tigermonday.com"
+documentation: "https://github.com/TigerMonday/gtm_templates_ga4_get_analytics_storage/README.md"
+versions:
+  - sha: b6a623c520b71a30c23f9a204cf45af6c6c1bdbf
+    changeNotes: Initial release of GA4 Get Analytics Storage template
