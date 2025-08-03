@@ -26,21 +26,21 @@ Push **Client ID**, **Session ID**, **Session Number** and **Measurement ID*
 | ------------------- | ---- | ---------------------------------------- | --------------------------------------------------------------------------- |
 | **`measurementId`** | TEXT | **Yes**                                  | GA4 Measurement ID (e.g. `G‑XXXXXXX`).                                      |
 | **`eventName`**     | TEXT | No<br>(default `analytics_storage_read`) | Event name pushed to the dataLayer.                                         |
-| **`valuePrefix`**   | TEXT | No                                       | Prefix for key names.<br>`test` → `test_client_id`, `test_ga_session_id`, … |
+| **`valuePrefix`**   | TEXT | No                                       | Prefix for key names.<br>`my` → `my_client_id`, `my_ga_session_id`, … |
 
 ---
 
 ## 📤 Example dataLayer output
 
-With `valuePrefix = "test"` and `eventName` left default:
+With `valuePrefix = "my"` and `eventName` left default:
 
 ```jsonc
 {
   "event": "analytics_storage_read",
-  "test_client_id":      "GA1.2.1393238191.1754052334",
-  "test_ga_session_id":  "1725206400",
-  "test_session_number": "5",
-  "test_measurement_id": "G‑XXXXXXX"
+  "my_client_id":      "1393238191.1754052334",
+  "my_ga_session_id":  "1725206400",
+  "my_session_number": "5",
+  "my_measurement_id": "G‑XXXXXXX"
 }
 ```
 
